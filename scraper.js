@@ -23,8 +23,7 @@ const loadSite = async() => {
             agent.tel = agent.tel.replace(/\D/g,''); //https://stackoverflow.com/questions/1862130/strip-all-non-numeric-characters-from-string-in-javascript
         }
 
-        // console.log($(element).children("a").text().split(" ")[0]); //delete me
-
+        //get rid of weird case
         if(agent.tel === "Email"){
             agent.tel = "";
         }
@@ -54,15 +53,15 @@ loadSite().then(agents => {
     worksheet.columns.forEach(column => {
         column.width = column.header.length < 12 ? 12 : column.header.length
     });
-    worksheet.getRow(1).font = {bold: true}
+    worksheet.getRow(1).font = {bold: true};
 
     //add data to the rows of the sheet. As you can see this is pretty friendly with Javascript objects
     agents.forEach((e, index) => {
         const rowIndex = index + 2;
 
         worksheet.addRow({
-            ...e
-        })
+            ...e //our destructured object!
+        });
     });
 
     //save to file
